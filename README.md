@@ -1,6 +1,6 @@
 # Prova Semestral - 2/2022 - Stellantis: Smart Mobility & Technology Solutions
 
-**nome dos alunos:** 
+**Nome dos alunos:** 
 Adhemar Quispe Mamani **RM:** 83764
 Carolina Bartoli **RM:** 83160
 Gabriel de Castro Saconi **RM:** 82743 

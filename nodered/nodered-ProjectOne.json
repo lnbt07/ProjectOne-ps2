@@ -1,0 +1,352 @@
+[
+    {
+        "id": "49d87282872ac80e",
+        "type": "tab",
+        "label": "PS2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b3138c3090e6386b",
+        "type": "inject",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"A\":0,\"B\":0}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "b36794ec0edb1528"
+            ]
+        ]
+    },
+    {
+        "id": "c792349153705d26",
+        "type": "inject",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"A\":0,\"B\":1}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "b36794ec0edb1528"
+            ]
+        ]
+    },
+    {
+        "id": "2b20dfcb3932a6f1",
+        "type": "inject",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"A\":1,\"B\":0}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "b36794ec0edb1528"
+            ]
+        ]
+    },
+    {
+        "id": "a9f2778154d0d09b",
+        "type": "inject",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"A\":1,\"B\":1}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "b36794ec0edb1528"
+            ]
+        ]
+    },
+    {
+        "id": "cc6fb78ad5b14537",
+        "type": "mqtt out",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "topic": "fiap/4sis/project-one/vagas",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "02d2af3da78db8b9",
+        "x": 1160,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "10df13b4d6ca3ed4",
+        "type": "mqtt in",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "topic": "fiap/4sis/project-one/vagas",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "02d2af3da78db8b9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 440,
+        "wires": [
+            [
+                "6cd2aff26106fbb1",
+                "81f4061af6c98066"
+            ]
+        ]
+    },
+    {
+        "id": "386e544df4d7c456",
+        "type": "ui_gauge",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "group": "b3b3adb0f8c5ae7c",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Vagas Ocupadas",
+        "label": " vaga(s)",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2",
+        "colors": [
+            "#ff3838",
+            "#ff3838",
+            "#ff3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1130,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8a7900edfa4cad4a",
+        "type": "function",
+        "z": "49d87282872ac80e",
+        "name": "vaga A",
+        "func": "var p=JSON.parse(msg.payload);\n\nif(p.A == 0 && p.B == 0){\n    msg.payload = \"X\";\n} else if (p.A == 1 && p.B == 0) {\n    msg.payload = \"A\";\n} else if (p.A == 0 && p.B == 1){\n    msg.payload = \"B\";\n} else if (p.A == 1 && p.B == 1) {\n    msg.payload = \"AB\";\n} \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 200,
+        "wires": [
+            [
+                "cc6fb78ad5b14537"
+            ]
+        ]
+    },
+    {
+        "id": "b36794ec0edb1528",
+        "type": "json",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "8a7900edfa4cad4a"
+            ]
+        ]
+    },
+    {
+        "id": "6cd2aff26106fbb1",
+        "type": "function",
+        "z": "49d87282872ac80e",
+        "name": "Ocupadas",
+        "func": "var data = msg.payload;\n\nif(data == \"X\"){\n    msg.payload = 2;\n} else if (data == \"A\" || data == \"B\"){\n    msg.payload = 1;\n} else {\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "386e544df4d7c456"
+            ]
+        ]
+    },
+    {
+        "id": "a95471b9363b5836",
+        "type": "ui_gauge",
+        "z": "49d87282872ac80e",
+        "name": "",
+        "group": "b3b3adb0f8c5ae7c",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Vagas Livres",
+        "label": " vaga(s)",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2",
+        "colors": [
+            "#1ec832",
+            "#1ec832",
+            "#1ec832"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1130,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "81f4061af6c98066",
+        "type": "function",
+        "z": "49d87282872ac80e",
+        "name": "Livres",
+        "func": "var data = msg.payload;\n\nif(data == \"X\"){\n    msg.payload = 0;\n} else if (data == \"A\" || data == \"B\"){\n    msg.payload = 1;\n} else {\n    msg.payload = 2;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 480,
+        "wires": [
+            [
+                "a95471b9363b5836"
+            ]
+        ]
+    },
+    {
+        "id": "d4f842e58109c70f",
+        "type": "ui_spacer",
+        "z": "49d87282872ac80e",
+        "name": "spacer",
+        "group": "9072657238de62f2",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "02d2af3da78db8b9",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b3b3adb0f8c5ae7c",
+        "type": "ui_group",
+        "name": "Estacionamento",
+        "tab": "4fcf54816a0995ca",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9072657238de62f2",
+        "type": "ui_group",
+        "name": "NAC4",
+        "tab": "ecbe014295c49cc3",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4fcf54816a0995ca",
+        "type": "ui_tab",
+        "name": "PS",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ecbe014295c49cc3",
+        "type": "ui_tab",
+        "name": "minhaUI",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

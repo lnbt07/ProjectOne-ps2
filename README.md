@@ -34,7 +34,7 @@ A programação do arduino foi feita utilizando a linguagem C++, e a API foi fei
 
 ## Como usar 
 
-Você pode acessar o projeto no tinkercad clicando [aqui](https://www.tinkercad.com/things/lqPDxzQiHAm).
+Você pode acessar o projeto no tinkercad clicando [aqui](https://www.youtube.com/watch?v=FRETQ4nNp50).
 
 Também é possível ver ele funcionando através de:
 

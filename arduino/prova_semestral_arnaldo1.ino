@@ -1,5 +1,3 @@
-// C++ code
-//
 #include <Adafruit_LiquidCrystal.h>
 
 int dist1 = 0;
@@ -7,6 +5,7 @@ int dist1 = 0;
 int dist2 = 0;
 
 int livres, ocupadas, vaga1, vaga2 = 0;
+String texto1, texto2, final = "";
 
 Adafruit_LiquidCrystal lcd(0);
 
@@ -45,6 +44,7 @@ void loop()
   	Serial.print(dist1);
   	Serial.println(" cm");
     vaga1 = 1;
+    texto1 = "\"A\":0";
   } else {
     digitalWrite(11, HIGH);
     digitalWrite(10, LOW);
@@ -52,6 +52,7 @@ void loop()
   	Serial.print(dist1);
   	Serial.println(" cm");
     vaga1 = 0;
+    texto1 = "\"A\":1";
   }
 
   dist2 = 0.01723 * readUltrasonicDistance(3, 2);
@@ -62,6 +63,7 @@ void loop()
   	Serial.print(dist2);
   	Serial.println(" cm");
     vaga2 = 1;
+    texto2 = "\"B\":0";
   } else {
     digitalWrite(5, HIGH);
     digitalWrite(4, LOW);
@@ -69,9 +71,12 @@ void loop()
   	Serial.print(dist2);
   	Serial.println(" cm");
     vaga2 = 0;
+    texto2 = "\"B\":1";
   }
+  final = "\{"+texto1+","+texto2+"\}";
   ocupadas = vaga1 + vaga2;
   livres = 2 - ocupadas;
+  Serial.println(final);
   
   lcd.setCursor(0,0);
   lcd.print("vagas livres   ");
